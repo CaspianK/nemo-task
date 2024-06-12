@@ -1,0 +1,93 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API документация",
+        "description": "API документация для тестового задания Nemo.Travel",
+        "contact": {
+            "email": "shalkar.nyn@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/search": {
+            "get": {
+                "tags": [
+                    "Airports"
+                ],
+                "summary": "Поиск аэропортов по части названия",
+                "operationId": "a9991994ab33a958cf62c3efb70c7734",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Поисковый запрос",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 255,
+                            "minLength": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список аэропортов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 5374
+                                            },
+                                            "code": {
+                                                "type": "string",
+                                                "example": "NQZ"
+                                            },
+                                            "city_name_ru": {
+                                                "type": "string",
+                                                "example": "Астана"
+                                            },
+                                            "city_name_en": {
+                                                "type": "string",
+                                                "example": "Astana"
+                                            },
+                                            "name_ru": {
+                                                "type": "string",
+                                                "example": null,
+                                                "nullable": true
+                                            },
+                                            "name_en": {
+                                                "type": "string",
+                                                "example": null,
+                                                "nullable": true
+                                            },
+                                            "latitude": {
+                                                "type": "string",
+                                                "example": "51.02222"
+                                            },
+                                            "longitude": {
+                                                "type": "string",
+                                                "example": "71.46694"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации"
+                    }
+                }
+            }
+        }
+    }
+}
