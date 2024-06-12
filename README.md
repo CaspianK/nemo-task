@@ -29,3 +29,50 @@
    Время: **2 часа**
 
 Общее время в днях: **2 дня**
+
+## Deploy
+Поднять проект
+```shell
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php83-composer:latest \
+    composer install --ignore-platform-reqs
+    
+./vendor/bin/sail up -d
+./vendor/bin/sail artisan migrate
+```
+Импортировать данные
+```shell
+./vendor/bin/sail artisan import:airports
+```
+Проиндексировать данные
+```shell
+./vendor/bin/sail artisan elastic:index-airports
+```
+Настроить Laravel Octane
+```shell
+./vendor/bin/sail shell
+
+# Внутри Sail shell...
+./vendor/bin/rr get-binary
+chmod +x ./rr
+
+# Выйти из Sail shell
+./vendor/bin/sail build --no-cache
+```
+
+## Документация
+Генерация документации
+```shell
+./vendor/bin/sail artisan l5-swagger:generate
+```
+После чего документация будет доступна по адресу `/api/documentation`.
+
+## Тестирование
+Запуск тестов
+```shell
+./vendor/bin/sail artisan test
+```
+В тестах проверяется валидация параметров, статус ответа и корректность данных.
